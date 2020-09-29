@@ -9,28 +9,29 @@ import Home from './components/Home';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { products: [], currentProduct: null, whoAmI: null };
+    this.state = { produits: [], currentProduct: null, whoAmI: null };
+    store.subscribe(
+      () => {
+        this.setState(store.getState());
+      }
+    )
   }
-  /**
-   * Validate an authent with credentials
-   * @param {String} login Var login value
-   * @param {String} mdp 
-   */
-  authentification = (login, mdp) => {
-    if (login === 'Alex' && mdp === 'alex') {
-      this.setState({ whoAmI: login });
-    }
-  }
-  logout=()=>{
-    this.setState({whoAmI:null});
-  }
+  // authentification = (login, mdp) => {
+  //   if (login === 'Alex' && mdp === 'alex') {
+  //     this.setState({ whoAmI: login });
+  //   }
+  // }
+  // logout=()=>{
+  //   this.setState({whoAmI:null});
+  // }
   render() {
     return (
       <>
         <View><Text>AppState : {JSON.stringify(this.state)}</Text></View>
         <View>
           {
-            this.state.whoAmI===null?<Login onValidateChange={this.authentification} />:
+            this.state.whoAmI===null?
+            <Login />:
             <Home name={this.state.whoAmI} logout={()=>{this.setState({whoAmI:null})}}/>
           }
         </View>

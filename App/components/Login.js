@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import { View, Image, Button, Text, StyleSheet, Switch, TextInput } from 'react-native';
 import PropTypes from 'prop-types';
+import store from '../reducers/reducer';
 function Login(props) {
     const [state, setstate] = useState({ login: '', password: '', remember: true });
     return (
@@ -25,7 +26,7 @@ function Login(props) {
                 setstate({...state,remember:value});
             }} />
             <Button title="OK" onPress={()=>{
-              props.onValidateChange(state.login,state.password)
+             store.dispatch({type:'LOGIN',login:state.login,password:state.password})
               }}/>
           </View>
         </View>
